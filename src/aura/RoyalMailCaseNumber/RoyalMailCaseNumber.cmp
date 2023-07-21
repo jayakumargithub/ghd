@@ -1,0 +1,34 @@
+<aura:component controller="RoyalMailCaseNumberController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:handler name="init" action="{!c.init}" value="{!this}" />
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="hasCode" type="Boolean" default="false" />
+    <aura:attribute name="loaded" type="Boolean" default="false" />
+    <div style="border-bottom: 1px solid #ccc;">
+        <aura:if isTrue="{!v.loaded}">
+            <lightning:layout horizontalAlign="spread">
+                <lightning:layoutItem padding="around-small" flexibility="grow">
+                    <div style="line-height: 32px">
+                        <aura:if isTrue="{!not(v.hasCode)}">
+                            Royal Mail code hasn't been assigned
+                            <aura:set attribute="else">
+                                Royal Mail code has been assigned
+                            </aura:set>
+                        </aura:if>
+                    </div>
+                </lightning:layoutItem>
+                <aura:if isTrue="{!not(v.hasCode)}">
+                    <lightning:layoutItem padding="around-small" flexibility="grow">
+                        <div style="float: right;">
+                            <lightning:button variant="brand" label="Assign" title="Assign" onclick="{!c.assignToCase}" />
+                        </div>
+                    </lightning:layoutItem>
+                </aura:if>
+            </lightning:layout>
+            <aura:set attribute="else">
+                <div style="line-height: 32px; padding-left: 10px;">
+                	Loading...
+                </div>
+            </aura:set>
+        </aura:if>
+    </div>
+</aura:component>

@@ -1,0 +1,75 @@
+<apex:page standardController="GhdOrder__c" extensions="datadwell.DDOnRecordClassicExtension" showHeader="false" applyHtmlTag="false">
+    <apex:pageMessages id="Messages"/>
+    <style>
+        .dd-lightning {
+            position: absolute;
+            width: 100%;
+        }
+    </style>
+    <apex:includeLightning />
+    <div id="lightning" class="dd-lightning"/>
+    <apex:form >
+        <apex:actionFunction name="showPageMessage" action="{!showPageMessage}" rerender="messages">
+            <apex:param name="level" assignTo="{!level}" value="" />
+            <apex:param name="message" assignTo="{!message}" value="" />
+        </apex:actionFunction>
+        <apex:actionFunction name="clearPageMessage" action="{!clearPageMessage}" rerender="messages"/>
+    </apex:form>
+    <script>    
+    $Lightning.use("datadwell:DDAPP", function() {
+        $Lightning.createComponent("datadwell:SalesAthlete",
+                                   { 
+                                       recordId : "{!SObjectId}" ,
+                                       sObjectName : "ghdOrderHeader__c",
+                                       isVisualforce : "true",
+                                       componentDisplayMode: "Auto Select",
+                                       pageSize: 6
+                                   },
+                                   "lightning",
+                                   function(cmp) {
+                                       $A.eventService.addHandler({
+                                           event: 'force:navigateToURL',
+                                           handler: function (event) {
+                                               if (typeof sforce != 'undefined' && sforce.one) {
+                                                   sforce.one.navigateToURL(event.getParams().url);                                                   
+                                               } else {
+                                                   window.top.location.href = event.getParams().url;
+                                               }
+                                               
+                                           }
+                                       });
+                                       $A.eventService.addHandler({
+                                           event: 'force:navigateToSObject',
+                                           handler: function (event) {
+                                               if (typeof sforce != 'undefined' && sforce.one) {
+                                                   sforce.one.navigateToSObject(event.getParams().recordId, event.getParams().slideDevName);
+                                               } else {
+                                                   window.top.location.href = '/' + event.getParams().recordId;
+                                               }
+                                               
+                                           }
+                                       });
+                                       $A.eventService.addHandler({
+                                           event: 'force:showToast',
+                                           handler: function (event) {
+                                               var type = event.getParam('type');
+                                               var message = event.getParam('message');
+                                               if (typeof sforce != 'undefined' && sforce.one) {
+                                                   toastEvent.setParams({
+                                                       'type': type,
+                                                       'title': type.toUpperCase(),
+                                                       'message': message
+                                                   });
+                                                   toastEvent.fire();
+                                               } else {
+                                                   showPageMessage(type, message);
+                                                   setTimeout(clearPageMessage, 5000);  
+                                               }                                               
+                                           }
+                                       });
+                                   });
+
+                                  
+    });
+    </script>
+</apex:page>

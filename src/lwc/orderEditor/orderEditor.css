@@ -1,0 +1,84 @@
+/**
+ * Created by Jayakumar Mogenahall on 14/02/2023.
+ */
+
+:host{
+    --slds-c-input : 80px;
+}
+
+h1 {
+    font-size: x-large;
+    text-align: center;
+}
+
+h2 {
+    font-size: large;
+}
+
+.spinnerHolder{
+      position: relative;
+        display: inline-block;
+        width: 80px;
+        height: 80px;
+        background-color:red;
+}
+.datatableHeight{
+    height : 500px;
+}
+.spinner-padding {
+  padding-top: 100px;
+  margin-top: 100px;
+}
+.validate{}
+
+.productDataTable{
+    with:450px;
+}
+.error {
+   color:red;
+}
+
+ .container {
+   display: flex;
+   flex-wrap: wrap;
+ }
+
+ .item {
+   flex: 0 0 auto;
+
+   margin: 5px;
+   border-radius: 500px;
+   background-color: #F2F2F2;
+   padding:4px
+ }
+
+:host {
+  --badge-height: 1rem;
+  --badge-width: 1rem;
+}
+
+:host .slds-badge {
+  height: var(--badge-height);
+  width: var(--badge-width);
+  /* Add any other desired styles */
+}
+
+:host .slds-badge {
+  display: fixed;
+  align-items: center;
+  //justify-content: center;
+  text-align:center;
+}
+
+.oQty {
+    font-weight: 600;
+     color:red;
+}
+.fQty {
+     font-weight: 600;
+	color:blue;
+}
+.pQty{
+	 font-weight: 600;
+	 color:green;
+}

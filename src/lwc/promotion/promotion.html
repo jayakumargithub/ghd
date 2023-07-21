@@ -1,0 +1,46 @@
+<!--
+ - Created by Jayakumar Mogenahall on 20/04/2023.
+ -->
+
+<!-- Promotion -->
+<template>
+	<!-- Order Editor -->
+
+			<lightning-input type="text" label="Enter Search key" onchange={handleSearch}></lightning-input>
+</br>
+			<div style="height: 300px;">
+				<lightning-datatable
+						key-field="Id"
+						data={promoData}
+						show-row-number-column
+						row-number-offset={rowOffset}
+						draft-values={draftValues}
+						suppress-bottom-bar
+						column-widths-mode="fixed"
+						min-column-width="100px"
+						class="productDataTable"
+						onrowselection={handleOnRowAction}
+						onload={applyDtStyle}
+						errors={errors}
+						columns={columns}
+						selected-rows={xSelectedRows}
+						data-id="promotionDatatable">
+				</lightning-datatable>
+				<div if:true={dataSpinner} class="slds-spinner_relative spinner-padding">
+					<lightning-spinner variant="brand" alternative-text="Loading Materials..."
+									   size="medium"></lightning-spinner>
+				</div>
+			</div>
+
+			<br/>
+			<div style="text-align:center;">
+<!--				<lightning-button variant="brand" label="Cancel" class="slds-p-around_xx-small"-->
+<!--								  title="Back to Order Console" onclick={handleCancel}></lightning-button>-->
+<!--				<lightning-button variant="brand" label="Clear" class="slds-p-around_xx-small" title="Clear"-->
+<!--								  onclick={handleClear}></lightning-button> &nbsp;-->
+				<lightning-button variant="brand" label="Add/Remove Promotion" class="slds-p-around_xx-small"
+								  title="Add/Remove Promotion" onclick={handleAddPromotion}></lightning-button>
+			</div>
+
+	</template>
+</template>
